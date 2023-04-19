@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLASH CARDS</title>
+  <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+
+  <div id="swiper">
+    <label for="inputField">
+      <div 
+        id="drop_zone" 
+        class="card innerFile" 
+        ondrop="dropHandler(event);" 
+        ondragover="dragOverHandler(event);"
+      >
+        <p>click here or drop your JSON file </p>
+      </div>
+    </label>
+    <input type="file" id="inputField" multiple="true" hidden>
+  </div>
+
+  <script src="scripts/card.js"></script>
+  <script src="scripts/handleFiles.js"></script>
+  <script src="scripts/script.js"></script>
+</body>
+</html>
