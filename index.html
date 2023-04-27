@@ -1,30 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FLASH CARDS</title>
-  <link rel="stylesheet" href="stylesheets/style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLASH CARDS</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+  </head>
+  <body>
 
-  <div id="swiper">
-    <label for="inputField">
-      <div 
-        id="drop_zone" 
-        class="card innerFile" 
-        ondrop="dropHandler(event);" 
-        ondragover="dragOverHandler(event);"
-      >
-        <p>click here or drop your JSON file </p>
+    <div id="swiper">
+      <div class="cardFile card">
+        <div class="faces">
+          
+          <div class="face front">
+            <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+              <label for="inputField">
+                <p>click here or drop your JSON file </p>
+                <input type="file" id="inputField" multiple="true" hidden>
+              </label>
+            </div>
+            <h4>Or</h4>
+            <button id="jsonCreator">create json</button>
+          </div>
+          
+          <div class="face back">
+            <div class="questionArea">
+              <h2>question</h2>
+              <textarea id="questionTextArea" rows=8></textarea>
+            </div>
+            <div class="answerArea">
+              <h2>answer</h2>
+              <textarea id="answerTextArea" rows=8></textarea>
+            </div>
+            <div class="formButtons">
+              <button id="cancelForm">cancel</button>
+              <button id="saveForm">save</button>
+              <button id="createForm">create</button>
+            </div>
+          </div>
+          
+        </div>
       </div>
-    </label>
-    <input type="file" id="inputField" multiple="true" hidden>
-  </div>
+    </div>
 
-  <script src="scripts/card.js"></script>
-  <script src="scripts/handleFiles.js"></script>
-  <script src="scripts/script.js"></script>
-</body>
+    <script src="scripts/card.js"></script>
+    <script src="scripts/handleFiles.js"></script>
+    <script src="scripts/handleDropAndFormCard.js"></script>
+    <script src="scripts/script.js"></script>
+  </body>
 </html>

@@ -55,6 +55,9 @@ class Card{
   }
 
   #listenToMousEvent = ()=> {
+    //mouse double click
+    this.element.addEventListener("dblclick", ()=> { this.element.classList.toggle("clicked"); });
+
     //mousedown
     this.element.addEventListener("mousedown", (e)=> {
       const { clientX, clientY } = e;

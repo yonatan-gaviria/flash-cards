@@ -1,8 +1,11 @@
 const inputElement = document.getElementById("inputField");
-inputElement.addEventListener("change", buttonFileHandeler, false);
+inputElement.addEventListener("change", inputFileHandeler, false);
 
 //functions
-function dragOverHandler(ev) { ev.preventDefault(); }
+function dragOverHandler(ev) { 
+  ev.preventDefault(); 
+}
+
 function dropHandler(ev) {
   ev.preventDefault();
 
@@ -17,7 +20,7 @@ function dropHandler(ev) {
   //removeDragData(ev);
 }
 
-function buttonFileHandeler(ev) {
+function inputFileHandeler(ev) {
   ev.preventDefault();
   const fileList = this.files;
   for(i = 0; i < fileList.length; i++) {
