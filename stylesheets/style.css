@@ -167,3 +167,8 @@ textarea {
   border-radius: 10px;
   resize: none;
 }
+
+.questionArea, .answerArea {
+  display: flex;
+  flex-direction: column;
+}

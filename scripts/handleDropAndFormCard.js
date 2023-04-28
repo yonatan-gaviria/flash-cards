@@ -16,6 +16,9 @@ jsonCreator.addEventListener("click", ()=> {
 
 cancelForm.addEventListener("click", ()=> {
   cardFile.classList.toggle("clicked");
+  questionTextArea.value = "";
+  answerTextArea.value = "";
+  objectSaved.questions = [];
 });
 
 saveForm.addEventListener("click", ()=> {
@@ -24,10 +27,19 @@ saveForm.addEventListener("click", ()=> {
   objectSaved.questions.push({ question: questionText, answer: answerText });
   questionTextArea.value = "";
   answerTextArea.value = "";
-  console.log(objectSaved);
 });
 
 createForm.addEventListener("click", ()=> {
+  const jsonString = JSON.stringify(objectSaved);
+  const theBlob = new Blob([jsonString], {type: "application/json"});
+  const theURL = URL.createObjectURL(theBlob);
+
+  const link = document.createElement("a");
+  link.href = theURL;
+  link.download = "sample.json";
+  link.click();
+  URL.revokeObjectURL(link.href);
+
   cardsArray = objectSaved.questions;
   renderCards();
 });

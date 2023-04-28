@@ -43,6 +43,7 @@ function handleFile(file) {
       const array = atob(result.slice(29));
       const obj = JSON.parse(array);
       cardsArray = obj.questions;
+      cardsArray.sort(()=> Math.random() - 0.5);
       renderCards();
     };
   }
