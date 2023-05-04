@@ -13,29 +13,38 @@
         <div class="faces">
           
           <div class="face front">
-            <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+            <div id="dropZone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
               <label for="inputField">
-                <p>click here or drop your JSON file </p>
+                <p id="textDropZone"> click here or drop your JSON file </p>
                 <input type="file" id="inputField" multiple="true" hidden>
               </label>
             </div>
             <h4>Or</h4>
-            <button id="jsonCreator">create json</button>
+            <div>
+              <button id="jsonCreator">Create</button>
+              <button id="jsonEditor" disabled>Edit</button>
+              <button id="start" disabled>Start</button>
+            </div>
           </div>
           
           <div class="face back">
+            <div class="questionSelector">
+              <p id="leftSelector">◀</p>
+              <h2 id="questionAmount"> 1 / 0 </h2>
+              <p id="rightSelector">▶</p>
+            </div>
             <div class="questionArea">
               <h2>question</h2>
-              <textarea id="questionTextArea" rows=8></textarea>
+              <textarea id="questionTextArea" rows=6></textarea>
             </div>
             <div class="answerArea">
               <h2>answer</h2>
-              <textarea id="answerTextArea" rows=8></textarea>
+              <textarea id="answerTextArea" rows=6></textarea>
             </div>
             <div class="formButtons">
               <button id="cancelForm">cancel</button>
-              <button id="saveForm">save</button>
-              <button id="createForm">create</button>
+              <button id="saveForm" disabled>save</button>
+              <button id="createForm" disabled>create</button>
             </div>
           </div>
           
@@ -43,6 +52,7 @@
       </div>
     </div>
 
+    <script src="scripts/initialize variables.js"></script>
     <script src="scripts/card.js"></script>
     <script src="scripts/handleFiles.js"></script>
     <script src="scripts/handleDropAndFormCard.js"></script>

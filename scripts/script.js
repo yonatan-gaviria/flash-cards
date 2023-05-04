@@ -1,11 +1,3 @@
-const swiper = document.querySelector("#swiper");
-
-//variables
-let cardPosition = 0;
-let limitCards = 4;
-let cardsArray = [];
-
-//functions
 function createNewCard(question, answer) {
   const card = new Card({
     question: question,
@@ -35,6 +27,8 @@ function displayInitialCards() {
 }
 
 function renderCards() {
+  cardPosition = 0;
+  cardsArray.sort(()=> Math.random() - 0.5);
   swiper.innerHTML = "";
   displayInitialCards();
 }

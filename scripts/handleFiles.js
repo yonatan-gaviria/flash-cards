@@ -1,7 +1,5 @@
-const inputElement = document.getElementById("inputField");
 inputElement.addEventListener("change", inputFileHandeler, false);
 
-//functions
 function dragOverHandler(ev) { 
   ev.preventDefault(); 
 }
@@ -9,15 +7,14 @@ function dragOverHandler(ev) {
 function dropHandler(ev) {
   ev.preventDefault();
 
-  if (ev.dataTransfer.items) {
-    for (let i = 0; i < ev.dataTransfer.items.length; i++) {
-      if (ev.dataTransfer.items[i].kind === 'file') {
+  if(ev.dataTransfer.items) {
+    for(let i = 0; i < ev.dataTransfer.items.length; i++) {
+      if(ev.dataTransfer.items[i].kind === 'file') {
         let file = ev.dataTransfer.items[i].getAsFile();
         handleFile(file);
       }
     }
   }
-  //removeDragData(ev);
 }
 
 function inputFileHandeler(ev) {
@@ -43,8 +40,8 @@ function handleFile(file) {
       const array = atob(result.slice(29));
       const obj = JSON.parse(array);
       cardsArray = obj.questions;
-      cardsArray.sort(()=> Math.random() - 0.5);
-      renderCards();
+
+      updateFacesInfo();
     };
   }
 }
