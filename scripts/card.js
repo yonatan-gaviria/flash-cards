@@ -51,12 +51,12 @@ class Card{
     back.append(backText);
     
     this.element = card;
-    this.#listenToMousEvent();
+    this.#listenToMouseEvent();
   }
 
-  #listenToMousEvent = ()=> {
+  #listenToMouseEvent = ()=> {
     //mouse double click
-    this.element.addEventListener("dblclick", ()=> { this.element.classList.toggle("clicked"); });
+    this.element.addEventListener("dblclick", ()=> { this.element.classList.toggle("flipped"); });
 
     //mousedown
     this.element.addEventListener("mousedown", (e)=> {

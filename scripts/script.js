@@ -1,3 +1,12 @@
+const mainCard = new MainCard();
+swiper.append(mainCard.cardFile);
+
+goBack.addEventListener("click", ()=> {
+  cardPosition = 0; 
+  swiper.innerHTML = "";
+  swiper.append(mainCard.cardFile);
+});
+
 function createNewCard(question, answer) {
   const card = new Card({
     question: question,
@@ -20,15 +29,11 @@ function appendNewCard() {
   });
 }
 
-function displayInitialCards() {
-  for(let i = 0; i < limitCards; i++) {
-    appendNewCard();
-  }
-}
-
 function renderCards() {
   cardPosition = 0;
   cardsArray.sort(()=> Math.random() - 0.5);
   swiper.innerHTML = "";
-  displayInitialCards();
+  for(let i = 0; i < limitCards; i++) {
+    appendNewCard();
+  }
 }

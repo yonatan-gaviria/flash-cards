@@ -15,6 +15,16 @@ body {
   background: linear-gradient(0deg, #ff6036, #fd267a);
 }
 
+/* button go back */
+.containerGoBack {
+  display: flex;
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+  top: 0px;
+  left: 0px;
+}
+
 /* swiper and cards */
 #swiper {
   height: 100vh;
@@ -130,11 +140,11 @@ body {
   margin-top: 20px;
 }
 
-.onEdit .faces .front {
+.flipped .faces .front {
   transform: perspective(600px) rotateY(180deg);
 }
 
-.onEdit .faces .back {
+.flipped .faces .back {
   transform: perspective(600px) rotateY(360deg);
 }
 
