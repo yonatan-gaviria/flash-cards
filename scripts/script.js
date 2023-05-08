@@ -2,6 +2,7 @@ const mainCard = new MainCard();
 swiper.append(mainCard.cardFile);
 
 goBack.addEventListener("click", ()=> {
+  goBack.hidden = true;
   cardPosition = 0; 
   swiper.innerHTML = "";
   swiper.append(mainCard.cardFile);
@@ -13,15 +14,31 @@ function createNewCard(question, answer) {
     answer: answer,
     onDismiss: appendNewCard
   });
+  console.log(card);
   return card;
 }
 
 function appendNewCard() {
-  const position = cardsArray[cardPosition];
-  const card = createNewCard(position.question, position.answer);
-  swiper.append(card.element);
+  if(cardPosition >= arraySelected.length) {
+    if(onInfinite) {
+      cardPosition = 0; 
+      createCard();
+    } else if(!onInfinite && !mainCardAdded) {
+      mainCardAdded = true;
+      swiper.append(mainCard.cardFile);
+    }
+  } else {
+    createCard();
+  }
+
+  function createCard() {
+    const position = arraySelected[cardPosition];
+    const card = createNewCard(position.question, position.answer);
+    swiper.append(card.element);
+  }
+
   cardPosition++;
-  if(cardPosition >= cardsArray.length) { cardPosition = 0; }
+  if(cardPosition >= limitRenderCards + arraySelected.length) { goBack.hidden = true; }
   
   const cards = swiper.querySelectorAll(".card:not(.dismissing)");
   cards.forEach((card, index)=> {
@@ -31,9 +48,22 @@ function appendNewCard() {
 
 function renderCards() {
   cardPosition = 0;
-  cardsArray.sort(()=> Math.random() - 0.5);
+  temporalCardsArray.sort(()=> Math.random() - 0.5);
   swiper.innerHTML = "";
-  for(let i = 0; i < limitCards; i++) {
+
+  if(onRandom) {
+    arraySelected = temporalCardsArray;
+  } else {
+    arraySelected = cardsArray;
+  }
+
+  if(arraySelected.length < limitCards) {
+    limitRenderCards = arraySelected.length + 1 
+  } else {
+    limitRenderCards = limitCards;
+  }
+
+  for(let i = 0; i < limitRenderCards; i++) {
     appendNewCard();
   }
 }

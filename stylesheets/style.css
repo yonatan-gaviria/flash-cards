@@ -183,6 +183,14 @@ button {
   background-color: #3b3b3b75;
 }
 
+.checksContainer {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
  /* back face */
 textarea {
   width: 100%;

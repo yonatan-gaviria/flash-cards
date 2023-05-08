@@ -41,8 +41,11 @@ class MainCard{
     fronH4.innerText = "Or";
     frontFace.append(fronH4);
 
+    const buttonsAndChecksContainer = document.createElement("div");
+    frontFace.append(buttonsAndChecksContainer);
+    
     const buttonsContainer = document.createElement("div");
-    frontFace.append(buttonsContainer);
+    buttonsAndChecksContainer.append(buttonsContainer);
 
     const jsonCreator = document.createElement("button");
     jsonCreator.id = "jsonCreator";
@@ -60,6 +63,34 @@ class MainCard{
     start.innerText = "Start";
     start.disabled = true;
     buttonsContainer.append(start);
+
+    const checksContainer = document.createElement("div");
+    checksContainer.classList.add("checksContainer");
+    buttonsAndChecksContainer.append(checksContainer);
+
+    const labelInfiniteCheck = document.createElement("label");
+    labelInfiniteCheck.htmlFor = "infiniteCheck";
+    labelInfiniteCheck.innerText = "infinite";
+    checksContainer.append(labelInfiniteCheck);
+
+    const infiniteCheck = document.createElement("input");
+    infiniteCheck.id = "infiniteCheck";
+    infiniteCheck.type = "checkbox";
+    infiniteCheck.name = "infiniteCheck";
+    infiniteCheck.disabled = true;
+    labelInfiniteCheck.append(infiniteCheck);
+
+    const labelRandomCheck = document.createElement("label");
+    labelRandomCheck.htmlFor = "randomCheck";
+    labelRandomCheck.innerText = "random";
+    checksContainer.append(labelRandomCheck);
+
+    const randomCheck = document.createElement("input");
+    randomCheck.id = "randomCheck";
+    randomCheck.type = "checkbox";
+    randomCheck.name = "randomCheck";
+    randomCheck.disabled = true;
+    labelRandomCheck.append(randomCheck);
 
     const backFace = document.createElement("div");
     backFace.classList.add("face");
@@ -139,6 +170,8 @@ class MainCard{
     this.jsonCreatorBtn = jsonCreator;
     this.jsonEditorBtn = jsonEditor;
     this.startBtn = start;
+    this.infiniteCheck = infiniteCheck;
+    this.randomCheck = randomCheck;
     this.cancelForm = cancelForm;
     this.questionTextArea = questionTextArea;
     this.answerTextArea = answerTextArea;
@@ -156,6 +189,8 @@ class MainCard{
     this.dropZone.addEventListener("dragover", this.#dragOverHandler);
     this.inputElement.addEventListener("change", this.#inputFileHandeler);
 
+    this.infiniteCheck.addEventListener("change", this.#handlechecks);
+    this.randomCheck.addEventListener("change", this.#handlechecks);
     this.questionTextArea.addEventListener("keyup", this.#haveText);
     this.answerTextArea.addEventListener("keyup", this.#haveText);
     this.saveForm.addEventListener("click", this.#handlerSaveObject);
@@ -175,9 +210,13 @@ class MainCard{
       cardPosition = 0;
       this.cardFile.classList.toggle("flipped");
       this.#updateFacesInfo();
+      this.#haveText();
     });
 
     this.startBtn.addEventListener("click", ()=> {
+      goBack.hidden = false;
+      mainCardAdded = false;
+      temporalCardsArray = [...cardsArray];
       renderCards();
     });
 
@@ -255,6 +294,14 @@ class MainCard{
     }
   }
 
+  #handlechecks = (ev)=> {
+    if(ev.target.id === "infiniteCheck") {
+      onInfinite =!onInfinite;
+    } else if(ev.target.id === "randomCheck") {
+      onRandom = !onRandom;
+    }
+  }
+
   #haveText = ()=> {
     if(this.questionTextArea.value.length !== 0 && this.answerTextArea.value.length !== 0) { 
       this.saveForm.disabled = false; 
@@ -291,6 +338,7 @@ class MainCard{
     }
 
     this.#updateFacesInfo();
+    this.#haveText();
   }
 
   #updateFacesInfo = ()=> {
@@ -298,19 +346,17 @@ class MainCard{
       this.createForm.disabled = false;
       this.startBtn.disabled = false;
       this.jsonEditorBtn.disabled = false;
+      this.infiniteCheck.disabled = false;
+      this.randomCheck.disabled = false;
       this.textDropZone.innerText = `this file has ${ cardsArray.length } questions`;
     } else {
       this.createForm.disabled = true;
       this.saveForm.disabled = true;
       this.startBtn.disabled = true;
       this.jsonEditorBtn.disabled = true;
+      this.infiniteCheck.disabled = true;
+      this.randomCheck.disabled = true;
       this.textDropZone.innerText = "click here or drop your JSON file";
-    }
-
-    if(this.questionTextArea.value.length !== 0 && this.answerTextArea.value.length !== 0) { 
-      this.saveForm.disabled = false; 
-    } else {
-      this.saveForm.disabled = true;
     }
 
     if(cardPosition >= cardsArray.length) {
