@@ -5,6 +5,7 @@ goBack.addEventListener("click", ()=> {
   goBack.hidden = true;
   cardPosition = 0; 
   swiper.innerHTML = "";
+  mainCard.cardFile.style = "";
   swiper.append(mainCard.cardFile);
 });
 
@@ -14,7 +15,6 @@ function createNewCard(question, answer) {
     answer: answer,
     onDismiss: appendNewCard
   });
-  console.log(card);
   return card;
 }
 
