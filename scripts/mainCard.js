@@ -187,12 +187,12 @@ class MainCard{
   #createAddEventListeners = ()=> {
     this.dropZone.addEventListener("drop", this.#dropHandler);
     this.dropZone.addEventListener("dragover", this.#dragOverHandler);
-    this.inputElement.addEventListener("change", this.#inputFileHandeler);
+    this.inputElement.addEventListener("change", this.#inputFileHandler);
 
     this.infiniteCheck.addEventListener("change", this.#handlechecks);
     this.randomCheck.addEventListener("change", this.#handlechecks);
-    this.questionTextArea.addEventListener("keyup", this.#haveText);
-    this.answerTextArea.addEventListener("keyup", this.#haveText);
+    this.questionTextArea.addEventListener("keyup", this.#handlerSaveButtonState);
+    this.answerTextArea.addEventListener("keyup", this.#handlerSaveButtonState);
     this.saveForm.addEventListener("click", this.#handlerSaveObject);
     this.leftSelector.addEventListener("click", ()=> this.#moveingSelector(-1));
     this.rightSelector.addEventListener("click", ()=> this.#moveingSelector(1));
@@ -206,11 +206,13 @@ class MainCard{
     });
 
     this.jsonEditorBtn.addEventListener("click", ()=> {
-      temporalCardsArray = cardsArray;
+      temporalCardsArray = [...cardsArray];
       cardPosition = 0;
+      
       this.cardFile.classList.toggle("flipped");
+      this.questionTextArea.focus();
       this.#updateFacesInfo();
-      this.#haveText();
+      this.#handlerSaveButtonState();
     });
 
     this.startBtn.addEventListener("click", ()=> {
@@ -221,7 +223,7 @@ class MainCard{
     });
 
     this.cancelForm.addEventListener("click", ()=> {
-      cardsArray = temporalCardsArray;
+      cardsArray = [...temporalCardsArray];
       this.cardFile.classList.toggle("flipped");
       this.#updateFacesInfo();
     });
@@ -262,15 +264,13 @@ class MainCard{
     }
   }
 
-  #inputFileHandeler = (ev)=> {
+  #inputFileHandler = (ev)=> {
     ev.preventDefault();
     const fileList = ev.target.files;
-    if(fileList) {
+    if(fileList.length !== 0) {
       this.#handleFile(fileList[0]);
-      /* for(i = 0; i < fileList.length; i++) {
-        this.#handleFile(fileList[i]);
-      } */
     }
+    ev.target.value = "";
   }
 
   #handleFile = (file)=> {
@@ -288,6 +288,7 @@ class MainCard{
         const array = atob(result.slice(29));
         const obj = JSON.parse(array);
         cardsArray = obj.questions;
+        temporalCardsArray = [...cardsArray];
   
         this.#updateFacesInfo();
       };
@@ -302,11 +303,21 @@ class MainCard{
     }
   }
 
-  #haveText = ()=> {
+  #handlerSaveButtonState = ()=> {
     if(this.questionTextArea.value.length !== 0 && this.answerTextArea.value.length !== 0) { 
       this.saveForm.disabled = false; 
     } else {
       this.saveForm.disabled = true;
+    }
+
+    if(cardPosition < cardsArray.length) {
+      if(this.questionTextArea.value !== cardsArray[cardPosition].question || this.answerTextArea.value !== cardsArray[cardPosition].answer) {
+        if(this.questionTextArea.value.length !== 0 && this.answerTextArea.value.length !== 0) { 
+          this.saveForm.disabled = false; 
+        } 
+      } else {
+        this.saveForm.disabled = true;
+      }
     }
   }
 
@@ -327,6 +338,7 @@ class MainCard{
     cardPosition++;
 
     this.#updateFacesInfo();
+    this.#handlerSaveButtonState();
   }
 
   #moveingSelector = (value)=> {
@@ -336,9 +348,10 @@ class MainCard{
     } else if(cardPosition >= cardsArray.length) {
       cardPosition = cardsArray.length 
     }
+    this.questionTextArea.focus();
 
     this.#updateFacesInfo();
-    this.#haveText();
+    this.#handlerSaveButtonState();
   }
 
   #updateFacesInfo = ()=> {
