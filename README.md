@@ -3,7 +3,8 @@
 This project is created as a method of review and reinforcement of knowledge, based on questions and answers; where you can create and edit your JSON files and save them by theme.
 
 ## Built with 🛠️
-This project was created with:
+This project was created with: 
+
 ![](./screenshots/logos.png)
 
 ## About the project 📖
@@ -21,8 +22,9 @@ After you have your questions uploaded, you can edit them or start your review; 
 ![](./screenshots/menu_with_questions_loaded(buttons).jpg)
 
 At the end, we have two check buttons to select the way you want to interact with your cards:
-✅ ####Infinite: You will be able to see your questions without having to restart the questions.
-✅ ####Random: The cards are shuffled before you start your review.
+- Infinite: You will be able to see your questions without having to restart the questions.
+- Random: The cards are shuffled before you start your review.
+
 ![](./screenshots/menu_with_checks(checks).jpg)
 
 When you start your review, you will be able to see the cards ordered as follows:
