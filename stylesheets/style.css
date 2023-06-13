@@ -180,7 +180,7 @@ button {
 #dropZone {
   height: 50%;
   width: 80%;
-  background-color: #3b3b3b30
+  background-color: #3b3b3b30;
 }
 #dropZone:hover {
   background-color: #3b3b3b75;
@@ -192,6 +192,10 @@ button {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+
+.checksContainer label {
+  cursor: pointer;
 }
 
  /* back face */
